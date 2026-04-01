@@ -15,7 +15,7 @@ CATEGORY_CHOICES = [
     ('other', 'Другое'),
 ]
 
-class News(models.Model):
+class NewsModel(models.Model):
     headline = models.CharField(max_length=15, verbose_name="Заголовок")
     content = models.TextField(verbose_name="Содержимое")
     categories = models.CharField(choices=CATEGORY_CHOICES, max_length=25, verbose_name="Kатегории")
@@ -23,10 +23,6 @@ class News(models.Model):
     def __str__(self):
         return f"Заголовок - {self.headline} || Категория - {self.categories}"
     
-class Vievs(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vievs")
-    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name="news")
 
     
 

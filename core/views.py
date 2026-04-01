@@ -1,13 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.generics import GenericAPIView
 from rest_framework import mixins
 from rest_framework.response import Response
-from .models import News
+from .models import NewsModel
 from .serializers import NewsSerializer
 
 class NewsListAPIView(GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     serializer_class = NewsSerializer
-    queryset = News.objects.all()
+    queryset = NewsModel.objects.all()
 
     def get(self, request):
         return self.list(request)
@@ -17,7 +17,7 @@ class NewsListAPIView(GenericAPIView, mixins.ListModelMixin, mixins.CreateModelM
     
 class NewsRetrieveAPIView(GenericAPIView, mixins.DestroyModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin):
     serializer_class = NewsSerializer
-    queryset = News.objects.all()
+    queryset = NewsModel.objects.all()
 
     def get(self, request, pk):
         return self.retrieve(request, pk)
@@ -30,3 +30,4 @@ class NewsRetrieveAPIView(GenericAPIView, mixins.DestroyModelMixin, mixins.Updat
     
     def patch(self, request, pk):
         return self.update(request, pk)
+    
